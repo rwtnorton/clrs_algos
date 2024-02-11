@@ -9,7 +9,7 @@ export fn insertion_sort(values: [*]i64, n: usize) void {
         const v = values[i];
         var j = i - 1;
         var exhausted = false;
-        while (j >= 0 and values[j] > v) {
+        while (j >= 0 and values[j] > v) : (j -= 1) {
             // std.debug.print("i={d}, v={d}, j={d}, vj={d}\t:{any}\n", .{ i, v, j, values[j], hmm });
             values[j + 1] = values[j];
             // std.debug.print("\t\t\t:{any}\n", .{hmm});
@@ -17,7 +17,6 @@ export fn insertion_sort(values: [*]i64, n: usize) void {
                 exhausted = true;
                 break;
             }
-            j -= 1;
         }
         if (exhausted) {
             values[0] = v;
