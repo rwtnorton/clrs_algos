@@ -8,6 +8,11 @@ export fn insertion_sort(values: [*]i64, n: usize) void {
     for (1..n) |i| {
         const v = values[i];
         var j = i - 1;
+        //
+        // Our use of usize for indexing makes parts of this algorithm a little funky.
+        // Namely, we need to take special care around j==0;
+        // if we do the natural thing and decrement when j==0, we'll get an underflow error.
+        //
         var exhausted = false;
         while (j >= 0 and values[j] > v) : (j -= 1) {
             // std.debug.print("i={d}, v={d}, j={d}, vj={d}\t:{any}\n", .{ i, v, j, values[j], hmm });
