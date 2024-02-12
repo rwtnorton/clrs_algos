@@ -1,5 +1,5 @@
 pub fn insertion_sort<T: PartialOrd + Clone>(values: &mut [T]) {
-    if values.len() == 0 {
+    if values.is_empty() {
         return
     }
     for i in 1..values.len() {
@@ -48,7 +48,7 @@ fn test_duo_slice() {
 }
 
 #[test]
-fn test_nonuniques_slice() {
+fn test_non_uniques_slice() {
     let mut given : Vec<i32> = vec![1, 2, 1, 2, 1];
     let expect : Vec<i32> = vec![1, 1, 1, 2, 2];
     insertion_sort(&mut given);
