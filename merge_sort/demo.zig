@@ -1,5 +1,8 @@
 const std = @import("std");
 
+//
+// This interface is SO GROSS!
+//
 extern fn merge_sort(values: [*]i64, lo: usize, hi: usize, l_scratch: [*]i64, r_scratch: [*]i64) void;
 
 pub fn main() !void {

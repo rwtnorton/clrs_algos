@@ -42,34 +42,50 @@ fn merge(vs: [*]i64, lo: usize, mid: usize, hi: usize, l_scratch: [*]i64, r_scra
     }
 }
 
-// test "empty array" {
-//     var arr = [_]i64{};
-//     var ptr: [*]i64 = &arr;
-//     insertion_sort(ptr, arr.len);
-//     try std.testing.expectEqual(0, arr.len);
-// }
+test "empty array" {
+    var arr = [_]i64{};
+    var ptr: [*]i64 = &arr;
+    var l_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var l_ptr = &l_arr;
+    var r_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var r_ptr = &r_arr;
+    merge_sort(ptr, 0, arr.len, l_ptr, r_ptr);
+    try std.testing.expectEqual(0, arr.len);
+}
 
-// test "unary array" {
-//     var arr = [_]i64{42};
-//     var ptr: [*]i64 = &arr;
-//     insertion_sort(ptr, arr.len);
-//     var expect: [arr.len]i64 = undefined;
-//     std.mem.copyForwards(i64, &expect, &arr);
-//     try std.testing.expectEqual(expect, arr);
-// }
+test "unary array" {
+    var arr = [_]i64{42};
+    var ptr: [*]i64 = &arr;
+    var l_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var l_ptr = &l_arr;
+    var r_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var r_ptr = &r_arr;
+    merge_sort(ptr, 0, arr.len, l_ptr, r_ptr);
+    var expect: [arr.len]i64 = undefined;
+    std.mem.copyForwards(i64, &expect, &arr);
+    try std.testing.expectEqual(expect, arr);
+}
 
-// test "duo array" {
-//     var arr = [_]i64{ 69, 42 };
-//     var ptr: [*]i64 = &arr;
-//     insertion_sort(ptr, arr.len);
-//     var expect = [arr.len]i64{ 42, 69 };
-//     try std.testing.expectEqual(expect, arr);
-// }
+test "duo array" {
+    var arr = [_]i64{ 69, 42 };
+    var ptr: [*]i64 = &arr;
+    var l_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var l_ptr = &l_arr;
+    var r_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var r_ptr = &r_arr;
+    merge_sort(ptr, 0, arr.len, l_ptr, r_ptr);
+    var expect = [arr.len]i64{ 42, 69 };
+    try std.testing.expectEqual(expect, arr);
+}
 
-// test "non-unique items" {
-//     var arr = [_]i64{ 1, 2, 1, 2, 1 };
-//     var ptr: [*]i64 = &arr;
-//     insertion_sort(ptr, arr.len);
-//     var expect = [arr.len]i64{ 1, 1, 1, 2, 2 };
-//     try std.testing.expectEqual(expect, arr);
-// }
+test "non-unique items" {
+    var arr = [_]i64{ 1, 2, 1, 2, 1 };
+    var ptr: [*]i64 = &arr;
+    var l_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var l_ptr = &l_arr;
+    var r_arr = [_]i64{0} ** (@divFloor(arr.len, 2) + 1);
+    var r_ptr = &r_arr;
+    merge_sort(ptr, 0, arr.len, l_ptr, r_ptr);
+    var expect = [arr.len]i64{ 1, 1, 1, 2, 2 };
+    try std.testing.expectEqual(expect, arr);
+}
